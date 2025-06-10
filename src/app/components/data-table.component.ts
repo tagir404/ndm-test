@@ -15,14 +15,11 @@ import type {
       <thead class="table__head">
         <tr>
           @for (header of headers; track header.key) {
-          <td
-            class="table__head-cell"
-            (click)="setSortableParams(header.key)"
-          >
+          <td class="table__head-cell" (click)="changeSortParams(header.key)">
             {{ header.label }}
-            @if (header.key === currentSortableParams().key) {
+            @if (header.key === curSortParams().key) {
             <svg
-              [class]="currentSortableParams().direction"
+              [class]="curSortParams().direction"
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
               viewBox="0 -960 960 960"
@@ -81,28 +78,28 @@ export class DataTable {
     const routesCopy = [...this.routesList()];
 
     return routesCopy.sort((a, b) => {
-      const valA = a[this.currentSortableParams().key];
-      const valB = b[this.currentSortableParams().key];
+      const valA = a[this.curSortParams().key];
+      const valB = b[this.curSortParams().key];
 
-      if (this.currentSortableParams().direction === 'down')
+      if (this.curSortParams().direction === 'down')
         return valA < valB ? -1 : valA > valB ? 1 : 0;
       else return valA > valB ? -1 : valA < valB ? 1 : 0;
     });
   });
 
-  currentSortableParams = signal<SortableParams>({
+  curSortParams = signal<SortableParams>({
     key: 'address',
     direction: 'down',
   });
 
-  setSortableParams(newValue: SortableParamsValue) {
-    if (this.currentSortableParams().key !== newValue) {
-      this.currentSortableParams.set({ key: newValue, direction: 'down' });
+  changeSortParams(newValue: SortableParamsValue) {
+    if (this.curSortParams().key !== newValue) {
+      this.curSortParams.set({ key: newValue, direction: 'down' });
     } else {
-      const { key, direction } = this.currentSortableParams();
+      const { key, direction } = this.curSortParams();
       if (direction === 'down')
-        this.currentSortableParams.set({ key, direction: 'up' });
-      else this.currentSortableParams.set({ key, direction: 'down' });
+        this.curSortParams.set({ key, direction: 'up' });
+      else this.curSortParams.set({ key, direction: 'down' });
     }
   }
 }

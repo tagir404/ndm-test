@@ -2,7 +2,6 @@ import { Component, signal } from '@angular/core';
 import { DataTable } from '../../components/data-table.component';
 import { Route } from '../../models/route.model';
 import type { WritableSignal } from '@angular/core';
-import { SortableParams } from '../../models/sortable-params.model';
 
 @Component({
   selector: 'home-page',

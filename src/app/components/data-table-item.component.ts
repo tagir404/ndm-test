@@ -2,7 +2,7 @@ import { Component, input } from "@angular/core";
 import { Route } from "../models/route.model";
 
 @Component({
-  selector: '[data-table-item]',
+  selector: 'tr[data-table-item]',
   template: `
     <td class="table-cell">{{ route().address }}</td>
     <td class="table-cell">{{ route().gateway }}</td>
