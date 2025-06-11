@@ -56,6 +56,9 @@ import type {
       user-select: none;
       position: relative;
     }
+    .table__head-cell:hover {
+      background:rgb(211, 211, 211);
+    }
     .table__head-cell svg {
       position: absolute;
       right: 10px;
